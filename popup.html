@@ -1,0 +1,72 @@
+<html>
+<head><title>Tab Garbage Collector Extension Options</title>
+<script src="popup.js"></script>
+
+<style type="text/css">
+h3 {
+    font:14px Verdana, Tahoma, sans-serif;
+    white-space: nowrap;
+    text-transform: uppercase;
+    color: gray;
+    width: 320px;
+}
+
+.tab {
+  display: block;
+  width: 320px;
+  float: left;
+  padding-top: 5px
+}
+
+.favicon {
+  display: inline-block;
+  float: left;
+  padding: 2px;
+  background-repeat: no-repeat;
+}
+
+a {
+  display: block;
+  font:12px Verdana, Tahoma, sans-serif;
+  width: 300px;
+  color: black;
+  text-overflow: ellipsis;
+  float: left;
+  overflow: hidden;
+  text-decoration: none;
+  font-weight: 600;
+  white-space: nowrap;
+  float: left;
+}
+
+a:hover {
+  text-decoration: underline; 
+} 
+
+.host {
+  text-transform: lowercase;
+  font:12px Verdana, Tahoma, sans-serif;
+  width: 150px;
+  display: block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+
+  color: gray;
+  float: left;
+}
+
+</style>
+</head>
+
+<body>
+
+<h3>recently collected tabs</h3>
+<hr/>
+
+
+<div id="list">
+</div>
+
+</body>
+</html>

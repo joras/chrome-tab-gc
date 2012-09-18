@@ -1,9 +1,12 @@
 var accessTimes = {};
-var OLD_AGE = 60000*60*4; //60000 * 60 * 2; // two hours
+var OLD_AGE = 60000*60*4;
 var GC_INTERVAL = 60000;
 var UPDATE_INTERVAL = 60000;
+var MAX_HISTORY = 10;
 
-// load conf
+var lastRemoved = [];
+
+// load configuration
 function loadConfig(){
     var conf_age = localStorage["old_age_mins"];
     if (conf_age) {
@@ -16,19 +19,30 @@ function updateAccess( tabId ) {
     accessTimes[tabId] = new Date();
 }
 
+// store removed tab to the history list
+function rememberRemoval( tab ) {
+    lastRemoved.unshift(tab);
+
+    if (lastRemoved.length > MAX_HISTORY) {
+        lastRemoved.pop();
+    }
+}
+
+// return last removed tabs
+function getLast() {
+    return lastRemoved;
+}
 
 // load config at startup
 loadConfig();
 
-// update time of all tabs on startup
+// update time of all tabs on plugin load
 chrome.tabs.query( {}, function( tabs ) {
     for (var i in tabs) {
         var tab = tabs[i];
         updateAccess(tab.id);
     }
 });
-
-
 
 // handle new tab event
 chrome.tabs.onCreated.addListener( function( tab ) {
@@ -58,6 +72,7 @@ function garbageCollect() {
             chrome.tabs.get(tabId, function(tab) {
                 if (!tab.pinned && !tab.active) {
                     chrome.tabs.remove([tab.id]);
+                    rememberRemoval(tab);
                 }
             });
         }
@@ -78,4 +93,3 @@ function updateActive() {
 
 setInterval( garbageCollect, GC_INTERVAL );
 setInterval( updateActive, UPDATE_INTERVAL );
-
