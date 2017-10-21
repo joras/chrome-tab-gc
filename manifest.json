@@ -14,9 +14,10 @@
     "default_title": "Tab Garbage Collector", 
     "default_popup": "popup.html"
   },
-  "options_page": "options.html",
+  "options_ui": {
+    "page": "options.html"
+  },
   "permissions": [
-      "tabs",
-      "chrome://favicon/"
+      "tabs"
   ]
 }
