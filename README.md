@@ -16,6 +16,13 @@ The visual clutter that comes with this is quite distractive.
 The extension marks the time when the tab was active and closes the tab when it has been
 inactive for specified time. Pinned tabs are not closed.
 
+Related work
+============
+
+Following the great example set by this extension, firefox now also implemented a variant of it:
+https://hacks.mozilla.org/2021/10/tab-unloading-in-firefox-93/ 
+They just forgot implementing to actually close the tabs...
+
 
 Licence
 =======
